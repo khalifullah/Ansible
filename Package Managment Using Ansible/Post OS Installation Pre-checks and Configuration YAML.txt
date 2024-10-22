@@ -10,6 +10,4 @@ Post OS Installation Pre-checks and Configuration YAML.txt
         name: '*'
         state: latest
 
-    - name: Set timezone to UTC
-      timezone:
-        name: UTC
+
