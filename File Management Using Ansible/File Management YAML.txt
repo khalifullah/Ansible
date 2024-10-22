@@ -1,5 +1,3 @@
-File Management YAML
-
 ---
 - name: Manage Configuration Files
   hosts: all
@@ -18,3 +16,70 @@ File Management YAML
         path: /etc/old_config.conf  # Replace with the actual file path to delete
         state: absent
 
+    - name: Ensure a directory exists for configuration files  # Replace with the desired directory path       #1
+      file:
+        path: /etc/myapp/configs  # Ensure the directory exists
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Template a configuration file  # Use a Jinja2 template to generate the config file                 #2
+      template:
+        src: /path/to/template.conf.j2  # Path to the Jinja2 template file
+        dest: /etc/myapp/config.conf  # Destination for the rendered configuration file
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Backup a configuration file  # Replace with the file to be backed up                               #3
+      copy:
+        src: /etc/config.conf  # Source file to back up
+        dest: /etc/config.conf.bak  # Destination for the backup file
+        owner: root
+        group: root
+        mode: '0644'
+        remote_src: yes  # The source file already exists on the remote machine
+
+    - name: Set permissions on a configuration file  # Replace with the target file                             #4
+      file:
+        path: /etc/myapp/config.conf  # File for which permissions will be set
+        owner: myuser  # Replace with the desired owner
+        group: mygroup  # Replace with the desired group
+        mode: '0600'  # Change permissions as needed
+
+    - name: Change the content of a configuration file  # Replace with the target file and content               #5
+      lineinfile:
+        path: /etc/myapp/config.conf  # File to be modified
+        regexp: '^Setting='  # Regular expression to find the line
+        line: 'Setting=new_value'  # New line to replace the old one
+
+    - name: Append a line to a configuration file  # Replace with the target file and line to append             #6
+      lineinfile:
+        path: /etc/myapp/config.conf  # File to which the line will be added
+        line: 'AdditionalSetting=true'  # Line to append
+        state: present  # Ensure the line is present
+
+    - name: Remove a specific line from a configuration file  # Replace with the target file and line to remove  #7
+      lineinfile:
+        path: /etc/myapp/config.conf  # File to be modified
+        regexp: '^SettingToRemove='  # Regular expression to match the line to remove
+        state: absent  # Remove the matching line
+
+#######################################################################################################################################
+
+Explanation of Each Task
+
+1-Ensure a Directory Exists: This task ensures a specified directory exists for storing configuration files.
+
+2-Template a Configuration File: This uses a Jinja2 template to dynamically create a configuration file based on variables and templates.
+
+3-Backup a Configuration File: This task creates a backup of a specified configuration file.
+
+4-Set Permissions on a Configuration File: This sets the ownership and permissions for a specified configuration file.
+
+5-Change the Content of a Configuration File: This uses a regular expression to find and change specific lines in a configuration file.
+
+6-Append a Line to a Configuration File: This appends a specified line to a configuration file if it does not already exist.
+
+7-Remove a Specific Line from a Configuration File: This task removes a line matching a specified regular expression from the configuration file.

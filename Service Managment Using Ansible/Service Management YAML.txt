@@ -18,3 +18,65 @@
       yum:
         name: httpd  # Replace 'httpd' with the actual package name
         state: absent
+
+    - name: Install multiple packages                                         #1
+      yum:
+        name: 
+          - vim
+          - git
+        state: present
+
+    - name: Upgrade a specific package                                        #2
+      yum:
+        name: httpd  # Replace 'httpd' with the actual package name
+        state: latest
+
+    - name: List installed packages                                           #3
+      command: rpm -qa
+      register: installed_packages
+
+    - name: Check if a specific package is installed                          #4
+      command: rpm -q httpd  # Replace with the actual package name
+      register: package_check
+      ignore_errors: true  # Ignore errors if the package is not installed
+
+    - name: Remove multiple packages                                          #5
+      yum:
+        name: 
+          - vim
+          - git
+        state: absent
+
+    - name: Clean all cached package files                                    #6
+      yum:
+        name: '*'
+        state: absent
+        clean_requirements_on_remove: yes
+
+    - name: Display installed packages                                        #7
+      debug:
+        var: installed_packages.stdout_lines
+
+    - name: Display package installation status                               #8
+      debug:
+        msg: "httpd Package Status: {{ 'Installed' if package_check.rc == 0 else 'Not installed' }}"
+
+#################################################################################################################
+
+Explanation of Each Task
+
+1-Install Multiple Packages: This task installs multiple packages at once, making it easier to manage dependencies.
+
+2-Upgrade a Specific Package: This task upgrades a specific package to its latest available version.
+
+3-List Installed Packages: This task lists all installed packages using the rpm -qa command and registers the output.
+
+4-Check if a Specific Package is Installed: This task checks if a specific package is installed and registers the result, ignoring errors if the package is not found.
+
+5-Remove Multiple Packages: This task removes multiple packages at once, simplifying the management of installed software.
+
+6-Clean All Cached Package Files: This task cleans the package manager's cache, which can help free up space on the system.
+
+7-Display Installed Packages: This task displays the list of installed packages from the previous command using the debug module.
+
+8-Display Package Installation Status: This task outputs the installation status of a specific package, providing clear feedback on whether it is installed.

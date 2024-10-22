@@ -1,5 +1,3 @@
-Security Hardening YAML.txt
-
 ---
 - name: Security Hardening
   hosts: all
@@ -17,3 +15,74 @@ Security Hardening YAML.txt
         path: /etc/security/pwquality.conf
         line: 'minlen=8 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1'
 
+    - name: Ensure SSH protocol 2 is used                                             #1
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^Protocol'
+        line: 'Protocol 2'
+      notify: restart sshd
+
+    - name: Disable password authentication for SSH                                   #2
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication'
+        line: 'PasswordAuthentication no'
+      notify: restart sshd
+
+    - name: Enable firewall and allow SSH                                             #3
+      firewalld:
+        service: ssh
+        permanent: yes
+        state: enabled
+
+    - name: Set inactive session timeout for SSH                                      #4
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        line: 'ClientAliveInterval 300'  # Adjust interval as needed
+      notify: restart sshd
+
+    - name: Install and configure fail2ban                                            #5
+      apt: 
+        name: fail2ban
+        state: present
+
+    - name: Ensure fail2ban is enabled and started                                    #6
+      service:
+        name: fail2ban
+        state: started
+        enabled: yes
+
+    - name: Disable unused services                                                   #7
+      systemd:
+        name: {{ item }}
+        enabled: no
+        state: stopped
+      loop:
+        - telnet.socket
+        - ftp.socket
+        - nfs-server.service
+
+    - name: Set system limits for users                                               #8
+      lineinfile:
+        path: /etc/security/limits.conf
+        line: '* hard nofile 65536'  # Adjust limits as needed
+
+####################################################################################################
+
+Explanation of Each Task
+
+1-Ensure SSH Protocol 2 is Used: This task ensures that only SSH protocol 2 is used for secure communication.
+
+2-Disable Password Authentication for SSH: This task disables password authentication to enhance security, requiring the use of SSH keys instead.
+
+3-Enable Firewall and Allow SSH: This task configures the firewall to allow SSH traffic, ensuring the firewall is active.
+
+4-Set Inactive Session Timeout for SSH: This configures the SSH server to disconnect users after a specified period of inactivity.
+
+5-Install and Configure Fail2ban: This task installs the fail2ban software, which helps protect against brute-force attacks.
+
+6-Ensure Fail2ban is Enabled and Started: This ensures that the fail2ban service is running and set to start on boot.
+
+7-Disable Unused Services: This task stops and disables unnecessary services to reduce potential attack vectors.
+
+8-Set System Limits for Users: This task sets limits on the number of open files for users to mitigate resource exhaustion attacks.

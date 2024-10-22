@@ -1,5 +1,3 @@
-
-
 ---
 - name: System Updates and Patches
   hosts: all
@@ -14,3 +12,41 @@
       yum:
         name: httpd  # Replace 'httpd' with the actual package name you want to update
         state: latest
+
+    - name: Upgrade all packages to the latest available version
+      yum:
+        name: '*'  # This upgrades all installed packages, similar to the previous task
+        state: latest
+        update_only: yes  # Ensures only packages that need upgrading are upgraded
+
+    - name: Install a package if not present  # Replace 'git' with the desired package name
+      yum:
+        name: git  # Package to install
+        state: present  # Installs the package if it’s not already installed
+
+    - name: Remove a package  # Replace 'nano' with the package to remove
+      yum:
+        name: nano  # Package to be removed
+        state: absent  # Removes the package
+
+    - name: Clean up YUM cache
+      command: yum clean all  # Cleans up cached package data
+
+    - name: List installed packages  # This task checks for installed packages
+      command: rpm -qa  # Command to list all installed packages
+      register: installed_packages  # Store the output
+
+    - name: Check for available updates
+      command: yum check-update  # Command to check for available updates
+      register: update_check  # Store the output
+
+    - name: Install security updates only
+      yum:
+        name: '*'
+        state: latest
+        security: yes  # Install only security updates
+
+    - name: Reboot the system if needed
+      reboot:
+        msg: "Rebooting the server to apply updates"
+        when: update_check.stdout | length > 0  # Reboot only if updates were found
