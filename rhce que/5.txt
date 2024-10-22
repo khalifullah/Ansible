@@ -1,0 +1,26 @@
+Q5
+
+cat timesync.yaml
+- name: Manage timesync with all servers
+  hosts: all
+  become: true
+  vars:
+    timesync_ntp_servers:
+      - hostname: 192.168.0.180
+        iburst: true
+  roles:
+    - role: redhat.rhel_system_roles.timesync
+
+
+###################################################################
+
+
+cat selinux.yaml
+- name: Manage selinux with all servers
+  hosts: all
+  become: true
+  vars:
+    selinux_policy: targeted
+    selinux_state: enforcing
+  roles:
+    - role: redhat.rhel_system_roles.selinux

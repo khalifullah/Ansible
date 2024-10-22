@@ -1,0 +1,29 @@
+cd /home/ansible/
+
+vim adhoc.yaaml
+
+---
+- name: Create YUM repositories on managed nodes
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create EX294_BASE repository
+      yum_repository:
+        name: EX294_BASE
+        description: "EX294 base software"
+        baseurl: http://server.network.example.com/BaseOs
+        enabled: true
+        gpgcheck: true
+        gpgkey: http://server.network.example.com/RHEL/RPM-GPG-KEY-redhat-release
+
+    - name: Create EX294_STREAM repository
+      yum_repository:
+        name: EX294_STREAM
+        description: "EX294 stream software"
+        baseurl: http://server.network.example.com/AppStream
+        enabled: true
+        gpgcheck: true
+        gpgkey: http://server.network.example.com/RHEL/RPM-GPG-KEY-redhat-release
+
+
+ansible-playbook /home/admin/ansible/adhoc.yaml

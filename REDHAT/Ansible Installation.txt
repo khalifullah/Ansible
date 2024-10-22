@@ -1,0 +1,44 @@
+Ansible Installation:
+
+Update the System:
+Ensure your RHEL system is up to date before installing Ansible.
+sudo yum update -y 
+
+Enable EPEL Repository:
+Ansible is available in the Extra Packages for Enterprise Linux (EPEL) repository, so you need to enable it:
+sudo yum install epel-release -y
+
+Install Ansible:
+After enabling the EPEL repository, install Ansible using the following command:
+sudo yum install ansible -y
+
+Verify the Installation:
+Check if Ansible is installed correctly by verifying its version:
+ansible --version
+
+Configure Ansible Inventory:
+The inventory file is where you define the managed hosts (servers). By default, it's located at /etc/ansible/hosts.
+--- Open the inventory file with a text editor:
+    sudo vi /etc/ansible/hosts
+
+--- Add the IP addresses or hostnames of the systems you want to manage:
+    [web]
+    webserver1 ansible_host=192.168.1.101 ansible_user=root
+    webserver2 ansible_host=192.168.1.102 ansible_user=root
+
+    [db]
+    dbserver1 ansible_host=192.168.1.201 ansible_user=root
+
+Configure SSH Access:
+Ansible communicates with managed nodes over SSH. Set up passwordless SSH access using key-based authentication.
+--- Generate an SSH key (if you don't have one already):
+    ssh-keygen -t rsa
+
+--- Copy the SSH key to the managed hosts:
+    ssh-copy-id root@192.168.1.xxx  # Replace with the IP address of your managed host.
+
+Test Connectivity:
+Once you have defined your hosts in the inventory file and set up SSH access, test connectivity using the ping module:
+ansible all -m ping
+
+
