@@ -1,0 +1,17 @@
+Disk Addition YAML
+
+---
+- name: Add a new disk
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create a new partition
+      parted:
+        device: /dev/sdb
+        number: 1
+        state: present
+        part_type: primary
+        fs_type: ext4
+        resize: yes
+        name: data
+
