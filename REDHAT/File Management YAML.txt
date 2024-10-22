@@ -1,0 +1,20 @@
+File Management YAML
+
+---
+- name: Manage Configuration Files
+  hosts: all
+  become: yes
+  tasks:
+    - name: Copy a configuration file  # Replace with the source and destination file paths
+      copy:
+        src: /path/to/source.conf  # Replace with the actual source file path
+        dest: /etc/config.conf  # Replace with the actual destination file path
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Delete an old config file  # Replace with the file to be deleted
+      file:
+        path: /etc/old_config.conf  # Replace with the actual file path to delete
+        state: absent
+

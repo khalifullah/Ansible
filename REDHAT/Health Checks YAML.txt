@@ -1,0 +1,19 @@
+Package Management YAML
+
+---
+- name: System Health Checks
+  hosts: all
+  become: yes
+  tasks:
+    - name: Check CPU usage
+      command: uptime
+      register: uptime_output
+
+    - name: Check memory usage
+      command: free -m
+      register: mem_output
+
+    - name: Check disk usage
+      command: df -h
+      register: disk_output
+

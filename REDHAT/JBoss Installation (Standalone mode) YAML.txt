@@ -1,0 +1,31 @@
+JBoss Installation (Standalone mode only) YAML
+
+---
+- name: Install JBoss Standalone
+  hosts: all
+  become: yes
+  tasks:
+    - name: Download JBoss
+      get_url:
+        url: https://download.jboss.org/jbossas/jboss-as-7.1.1.Final/jboss-as-7.1.1.Final.zip
+        dest: /tmp/jboss-as.zip
+
+    - name: Extract JBoss archive
+      unarchive:
+        src: /tmp/jboss-as.zip
+        dest: /opt/
+        remote_src: yes
+
+    - name: Move JBoss to the correct location
+      command: mv /opt/jboss-as-7.1.1.Final /opt/jboss
+
+    - name: Set JBoss ownership
+      file:
+        path: /opt/jboss
+        owner: jboss
+        group: jboss
+        state: directory
+
+    - name: Ensure JBoss standalone mode is ready
+      shell: |
+        /opt/jboss/bin/standalone.sh &

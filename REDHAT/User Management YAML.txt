@@ -1,0 +1,17 @@
+User Management YAML
+
+---
+- name: Manage Users
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create a new user  # Replace 'newuser' with the desired username
+      user:
+        name: newuser  # Replace 'newuser' with the actual username
+        state: present
+        groups: wheel  # Modify the group as needed
+
+    - name: Delete a user  # Replace 'olduser' with the username to remove
+      user:
+        name: olduser  # Replace 'olduser' with the actual username to delete
+        state: absent

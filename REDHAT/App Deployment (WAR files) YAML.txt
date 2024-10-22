@@ -1,0 +1,20 @@
+App Deployment (WAR files)
+
+---
+- name: Deploy WAR file to JBoss
+  hosts: all
+  become: yes
+  tasks:
+    - name: Copy WAR file to JBoss deployment directory  # Replace with the actual WAR file and destination paths
+      copy:
+        src: /path/to/app.war  # Replace with the actual path to the WAR file
+        dest: /opt/jboss/standalone/deployments/app.war  # Replace with the correct JBoss deployment directory
+
+    - name: Verify deployment by listing files in the deployment directory
+      shell: |
+        ls /opt/jboss/standalone/deployments/
+      register: war_check
+
+    - name: Show the result of the deployment check
+      debug:
+        var: war_check.stdout

@@ -1,0 +1,16 @@
+Package Management YAML
+
+---
+- name: Manage Packages
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install a package  # Replace 'package' with the desired package name
+      yum:
+        name: httpd  # Replace 'httpd' with the actual package name
+        state: present
+
+    - name: Remove a package  # Replace 'package' with the desired package name
+      yum:
+        name: httpd  # Replace 'httpd' with the actual package name
+        state: absent
