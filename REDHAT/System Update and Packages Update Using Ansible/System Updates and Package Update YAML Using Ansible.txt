@@ -1,4 +1,4 @@
-System Updates YAML
+
 
 ---
 - name: System Updates and Patches
@@ -8,4 +8,9 @@ System Updates YAML
     - name: Update all packages to the latest version
       yum:
         name: '*'  # This updates all installed packages
+        state: latest
+
+    - name: Update a specific package
+      yum:
+        name: httpd  # Replace 'httpd' with the actual package name you want to update
         state: latest
