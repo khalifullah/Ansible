@@ -16,7 +16,7 @@
         path: /etc/old_config.conf  # Replace with the actual file path to delete
         state: absent
 
-    - name: Ensure a directory exists for configuration files  # Replace with the desired directory path       #1
+    - name: Ensure a directory exists for configuration files  # Replace with the desired directory path         #1
       file:
         path: /etc/myapp/configs  # Ensure the directory exists
         state: directory
@@ -24,7 +24,7 @@
         group: root
         mode: '0755'
 
-    - name: Template a configuration file  # Use a Jinja2 template to generate the config file                 #2
+    - name: Template a configuration file  # Use a Jinja2 template to generate the config file                   #2
       template:
         src: /path/to/template.conf.j2  # Path to the Jinja2 template file
         dest: /etc/myapp/config.conf  # Destination for the rendered configuration file
@@ -32,7 +32,7 @@
         group: root
         mode: '0644'
 
-    - name: Backup a configuration file  # Replace with the file to be backed up                               #3
+    - name: Backup a configuration file  # Replace with the file to be backed up                                 #3
       copy:
         src: /etc/config.conf  # Source file to back up
         dest: /etc/config.conf.bak  # Destination for the backup file
@@ -41,7 +41,7 @@
         mode: '0644'
         remote_src: yes  # The source file already exists on the remote machine
 
-    - name: Set permissions on a configuration file  # Replace with the target file                             #4
+    - name: Set permissions on a configuration file  # Replace with the target file                              #4
       file:
         path: /etc/myapp/config.conf  # File for which permissions will be set
         owner: myuser  # Replace with the desired owner

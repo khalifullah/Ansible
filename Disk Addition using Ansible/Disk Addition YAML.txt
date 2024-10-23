@@ -13,7 +13,7 @@
         resize: yes
         name: data
 
-    - name: Create a filesystem on the new partition                         #1
+    - name: Create a filesystem on the new partition                          #1
       filesystem:
         fstype: ext4
         dev: /dev/sdb1  # Replace with the correct partition if needed
