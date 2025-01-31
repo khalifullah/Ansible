@@ -22,15 +22,15 @@
         shell: /bin/zsh  # Change the user's shell
         groups: admin  # Update the user's groups
 
-    - name: Lock a user account  # Replace 'lockeduser' with the username to lock
+    - name: Lock the user account
       user:
-        name: lockeduser
-        state: locked  # Lock the user account
+        name: k
+        password_lock: yes  # Lock the user account
 
     - name: Unlock a user account  # Replace 'unlockeduser' with the username to unlock
       user:
         name: unlockeduser
-        state: present  # Ensure the user is present and unlocked
+        password_lock: no  # Lock the user accoun
 
     - name: Add a user to multiple groups  # Replace 'multiuser' with the desired username
       user:
@@ -44,20 +44,3 @@
         home: /home/newhome  # New home directory
         state: present
 
-    - name: Create a user with SSH key  # Replace 'sshuser' with the desired username
-      user:
-        name: sshuser
-        state: present
-        ssh_key: "{{ lookup('file', 'path/to/ssh_key.pub') }}"  # Path to the public SSH key
-
-    - name: Remove a user’s SSH key  # Replace 'sshuser' and 'key' with actual values
-      authorized_key:
-        user: sshuser
-        state: absent
-        key: "{{ lookup('file', 'path/to/ssh_key.pub') }}"  # Path to the public SSH key
-
-    - name: Ensure a user has specific SSH authorized keys  # Replace 'anotheruser' with the desired username
-      authorized_key:
-        user: anotheruser
-        key: "{{ lookup('file', 'path/to/another_key.pub') }}"  # Path to the public SSH key
-        state: present

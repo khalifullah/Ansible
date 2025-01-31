@@ -6,6 +6,13 @@ sudo yum update -y
 
 Enable EPEL Repository:
 Ansible is available in the Extra Packages for Enterprise Linux (EPEL) repository, so you need to enable it:
+
+Download the EPEL repository package:
+sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+
+Verify the installation:
+sudo dnf repolist
+
 sudo yum install epel-release -y
 
 Install Ansible:
