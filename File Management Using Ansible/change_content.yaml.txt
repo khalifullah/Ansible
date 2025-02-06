@@ -1,0 +1,11 @@
+change_content.yaml
+
+- name: Change the content of a configuration file
+  hosts: all
+  become: yes
+  tasks:
+    - name: Modify a specific line in the configuration file
+      lineinfile:
+        path: /etc/myapp/config.conf
+        regexp: '^Setting='
+        line: 'Setting=new_value'

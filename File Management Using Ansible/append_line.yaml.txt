@@ -1,0 +1,11 @@
+append_line.yaml
+
+- name: Append a line to a configuration file
+  hosts: all
+  become: yes
+  tasks:
+    - name: Add a line to the configuration file
+      lineinfile:
+        path: /etc/myapp/config.conf
+        line: 'AdditionalSetting=true'
+        state: present

@@ -1,0 +1,11 @@
+remove_line.yml
+
+- name: Remove a specific line from a configuration file
+  hosts: all
+  become: yes
+  tasks:
+    - name: Remove a matching line from the configuration file
+      lineinfile:
+        path: /etc/myapp/config.conf
+        regexp: '^SettingToRemove='
+        state: absent

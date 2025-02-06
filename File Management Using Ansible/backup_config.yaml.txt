@@ -1,0 +1,14 @@
+backup_config.yaml
+
+- name: Backup a configuration file
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create a backup of the configuration file
+      copy:
+        src: /etc/config.conf
+        dest: /etc/config.conf.bak
+        owner: root
+        group: root
+        mode: '0644'
+        remote_src: yes

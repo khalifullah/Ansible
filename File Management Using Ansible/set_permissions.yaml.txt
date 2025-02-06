@@ -1,0 +1,12 @@
+set_permissions.yaml
+
+- name: Set permissions on a configuration file
+  hosts: all
+  become: yes
+  tasks:
+    - name: Set ownership and permissions
+      file:
+        path: /etc/myapp/config.conf
+        owner: myuser
+        group: mygroup
+        mode: '0600'

@@ -1,0 +1,13 @@
+template_config.yml
+
+- name: Template a configuration file
+  hosts: all
+  become: yes
+  tasks:
+    - name: Use a Jinja2 template to generate the config file
+      template:
+        src: /path/to/template.conf.j2
+        dest: /etc/myapp/config.conf
+        owner: root
+        group: root
+        mode: '0644'

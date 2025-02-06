@@ -1,0 +1,13 @@
+ensure_directory.yaml
+
+- name: Ensure a directory exists for configuration files
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure the directory exists
+      file:
+        path: /etc/myapp/configs
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'

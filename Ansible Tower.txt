@@ -1,0 +1,39 @@
+Ansible Tower
+-----------------------------------------
+
+Ansible Tower Installation - Step-by-Step Guide | Advanced Ansible Automation
+
+https://www.youtube.com/watch?v=sw5HhxomPVM&list=PLYEK_dHOjwtNJBNn4ZFYzA3w_t4NAbAef
+
+-----------------------------------------
+
+User & Team Management - Ansible Tower Session 2 | Advanced Ansible Automation
+
+https://www.youtube.com/watch?v=KNVxxxe2qRw&list=PLYEK_dHOjwtNJBNn4ZFYzA3w_t4NAbAef&index=2
+
+-----------------------------------------
+
+Inventory and Host In Ansible Tower Session 3 | Advanced Ansible Automation
+
+https://www.youtube.com/watch?v=yxRu-DaEQB8
+
+-----------------------------------------
+
+How to Push Playbook using Ansible Tower Session 4 | Advanced Ansible Automation
+
+https://www.youtube.com/watch?v=XNo_PjMhgLQ
+
+----------------------------------------
+
+How to Import Inventory File in Ansible Tower Session 5 | Advanced Ansible Automation
+
+https://www.youtube.com/watch?v=ZalLk-O0lF8
+
+----------------------------------------
+
+Integration GitHub to Ansible Tower Session 6 | Advanced Ansible Automation
+
+https://www.youtube.com/watch?v=4R1MRHWD5XQ
+
+---------------------------------------
+
