@@ -1,0 +1,9 @@
+---
+- name: Install a package if not present
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install a package if not present  # Replace 'git' with the desired package name
+      yum:
+        name: git  # Package to install
+        state: present  # Installs the package if it’s not already installed

@@ -1,0 +1,14 @@
+---
+- name: Disable unused services
+  hosts: all
+  become: yes
+  tasks:
+    - name: Disable unused services
+      systemd:
+        name: "{{ item }}"
+        enabled: no
+        state: stopped
+      loop:
+        - telnet.socket
+        - ftp.socket
+        - nfs-server.service

@@ -1,0 +1,10 @@
+---
+- name: Clean all cached package files
+  hosts: all
+  become: yes
+  tasks:
+    - name: Clean all cached package files
+      yum:
+        name: '*'
+        state: absent
+        clean_requirements_on_remove: yes

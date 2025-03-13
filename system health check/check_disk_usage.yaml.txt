@@ -1,0 +1,12 @@
+---
+- name: Check disk usage
+  hosts: all
+  become: yes
+  tasks:
+    - name: Check disk usage
+      command: df -h
+      register: disk_output
+
+    - name: Display disk usage
+      debug:
+        msg: "Disk Usage: {{ disk_output.stdout }}"

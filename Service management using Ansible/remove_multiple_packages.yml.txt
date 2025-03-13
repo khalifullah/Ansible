@@ -1,0 +1,11 @@
+---
+- name: Remove multiple packages
+  hosts: all
+  become: yes
+  tasks:
+    - name: Remove multiple packages
+      yum:
+        name: 
+          - vim
+          - git
+        state: absent

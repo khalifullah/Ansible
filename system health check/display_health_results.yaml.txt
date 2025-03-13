@@ -1,0 +1,13 @@
+---
+- name: Display system health check results
+  hosts: all
+  become: yes
+  tasks:
+    - name: Display system health check results
+      debug:
+        msg:
+          - "CPU Usage: {{ uptime_output.stdout }}"
+          - "Memory Usage: {{ mem_output.stdout }}"
+          - "Disk Usage: {{ disk_output.stdout }}"
+          - "Available Updates: {{ update_output.stdout if update_output.rc == 0 else 'No updates available' }}"
+          - "httpd Package Status: {{ 'Installed' if package_check.rc == 0 else 'Not installed' }}"

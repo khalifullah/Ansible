@@ -1,0 +1,11 @@
+---
+- name: Install specified packages
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install specified packages
+      yum:
+        name:
+          - httpd  # Replace with the actual package names
+          - vim
+        state: present

@@ -1,0 +1,13 @@
+---
+- name: Add a new disk
+  hosts: all
+  become: yes
+  tasks:
+    - name: Add a new disk
+      parted:
+        device: /dev/sdb
+        number: 1
+        state: present
+        part_type: primary
+        fs_type: ext4
+        name: data

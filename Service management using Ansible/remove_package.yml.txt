@@ -1,0 +1,9 @@
+---
+- name: Remove a package
+  hosts: all
+  become: yes
+  tasks:
+    - name: Remove a package
+      yum:
+        name: httpd  # Replace 'httpd' with the actual package name
+        state: absent

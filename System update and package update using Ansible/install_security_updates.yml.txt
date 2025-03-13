@@ -1,0 +1,10 @@
+---
+- name: Install security updates only
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install security updates only
+      yum:
+        name: '*'
+        state: latest
+        security: yes  # Install only security updates

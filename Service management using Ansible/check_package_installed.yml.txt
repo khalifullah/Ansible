@@ -1,0 +1,9 @@
+---
+- name: Check if a specific package is installed
+  hosts: all
+  become: yes
+  tasks:
+    - name: Check if a specific package is installed
+      command: rpm -q httpd  # Replace with the actual package name
+      register: package_check
+      ignore_errors: true  # Ignore errors if the package is not installed

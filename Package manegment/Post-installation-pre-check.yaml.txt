@@ -1,0 +1,10 @@
+---
+- name: Post OS Installation Pre-checks and Configuration
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure the system is up to date
+      yum:
+        name: '*'
+        state: latest
+

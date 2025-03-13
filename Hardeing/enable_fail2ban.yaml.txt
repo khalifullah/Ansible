@@ -1,0 +1,10 @@
+---
+- name: Ensure fail2ban is enabled and started
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure fail2ban is enabled and started
+      service:
+        name: fail2ban
+        state: started
+        enabled: yes

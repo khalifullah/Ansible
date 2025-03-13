@@ -1,0 +1,12 @@
+---
+- name: Check CPU usage
+  hosts: all
+  become: yes
+  tasks:
+    - name: Check CPU usage
+      command: uptime
+      register: uptime_output
+
+    - name: Display CPU usage
+      debug:
+        msg: "CPU Usage: {{ uptime_output.stdout }}"

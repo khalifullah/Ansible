@@ -1,0 +1,17 @@
+---
+- name: Ensure SSH protocol 2 is used
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure SSH protocol 2 is used
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^Protocol'
+        line: 'Protocol 2'
+      notify: restart sshd
+
+  handlers:
+    - name: restart sshd
+      service:
+        name: sshd
+        state: restarted

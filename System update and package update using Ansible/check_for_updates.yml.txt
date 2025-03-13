@@ -1,0 +1,8 @@
+---
+- name: Check for available updates
+  hosts: all
+  become: yes
+  tasks:
+    - name: Check for available updates
+      command: yum check-update  # Command to check for available updates
+      register: update_check  # Store the output

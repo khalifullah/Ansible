@@ -1,0 +1,8 @@
+---
+- name: List installed packages
+  hosts: all
+  become: yes
+  tasks:
+    - name: List installed packages
+      command: rpm -qa  # Command to list all installed packages
+      register: installed_packages  # Store the output

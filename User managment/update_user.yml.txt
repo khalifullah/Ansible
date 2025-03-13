@@ -1,0 +1,10 @@
+---
+- name: Update an existing user
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update an existing user  # Replace 'existinguser' with the username to update
+      user:
+        name: existinguser
+        shell: /bin/zsh  # Change the user's shell
+        groups: admin  # Update the user's groups

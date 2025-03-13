@@ -1,0 +1,10 @@
+---
+- name: Remove unwanted packages
+  hosts: all
+  become: yes
+  tasks:
+    - name: Remove unwanted packages
+      yum:
+        name:
+          - oldpackage  # Replace with the actual package name to remove
+        state: absent

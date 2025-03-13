@@ -1,5 +1,3 @@
-append_line.yaml
-
 - name: Append a line to a configuration file
   hosts: all
   become: yes

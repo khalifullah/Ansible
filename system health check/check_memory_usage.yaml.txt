@@ -1,0 +1,12 @@
+---
+- name: Check memory usage
+  hosts: all
+  become: yes
+  tasks:
+    - name: Check memory usage
+      command: free -m
+      register: mem_output
+
+    - name: Display memory usage
+      debug:
+        msg: "Memory Usage: {{ mem_output.stdout }}"

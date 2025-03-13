@@ -1,0 +1,22 @@
+---
+- name: Create YUM repositories on managed nodes
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create BASE-OS repository
+      yum_repository:
+        name: BASE-OS
+        description: "base software"
+        baseurl: http://server.network.example.com/BaseOs
+        enabled: true
+        gpgcheck: true
+        gpgkey: http://server.network.example.com/RHEL/RPM-GPG-KEY-redhat-release
+
+    - name: Create APPSTREAM repository
+      yum_repository:
+        name: APPSTREAM
+        description: "APPstream software"
+        baseurl: http://server.network.example.com/AppStream
+        enabled: true
+        gpgcheck: true
+        gpgkey: http://server.network.example.com/RHEL/RPM-GPG-KEY-redhat-release

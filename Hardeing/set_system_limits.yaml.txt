@@ -1,0 +1,9 @@
+---
+- name: Set system limits for users
+  hosts: all
+  become: yes
+  tasks:
+    - name: Set system limits for users
+      lineinfile:
+        path: /etc/security/limits.conf
+        line: '* hard nofile 65536'  # Adjust limits as needed

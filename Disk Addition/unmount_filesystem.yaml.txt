@@ -1,0 +1,9 @@
+---
+- name: Unmount the filesystem
+  hosts: all
+  become: yes
+  tasks:
+    - name: Unmount the filesystem
+      mount:
+        path: /mnt/data
+        state: unmounted

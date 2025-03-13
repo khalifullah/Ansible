@@ -1,0 +1,10 @@
+---
+- name: Add a user to multiple groups
+  hosts: all
+  become: yes
+  tasks:
+    - name: Add a user to multiple groups  # Replace 'multiuser' with the desired username
+      user:
+        name: multiuser
+        state: present
+        groups: "group1,group2"  # Add the user to multiple groups

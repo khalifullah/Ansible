@@ -1,0 +1,10 @@
+---
+- name: Change a user's home directory
+  hosts: all
+  become: yes
+  tasks:
+    - name: Change a user's home directory  # Replace 'user' with the target username
+      user:
+        name: user
+        home: /home/newhome  # New home directory
+        state: present

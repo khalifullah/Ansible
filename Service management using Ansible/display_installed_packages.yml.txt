@@ -1,0 +1,8 @@
+---
+- name: Display installed packages
+  hosts: all
+  become: yes
+  tasks:
+    - name: Display installed packages
+      debug:
+        var: installed_packages.stdout_lines

@@ -1,0 +1,16 @@
+---
+- name: Set inactive session timeout for SSH
+  hosts: all
+  become: yes
+  tasks:
+    - name: Set inactive session timeout for SSH
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        line: 'ClientAliveInterval 300'  # Adjust interval as needed
+      notify: restart sshd
+
+  handlers:
+    - name: restart sshd
+      service:
+        name: sshd
+        state: restarted

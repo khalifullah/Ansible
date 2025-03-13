@@ -1,0 +1,9 @@
+---
+- name: Reboot the system if needed
+  hosts: all
+  become: yes
+  tasks:
+    - name: Reboot the system if needed
+      reboot:
+        msg: "Rebooting the server to apply updates"
+        when: update_check.stdout | length > 0  # Reboot only if updates were found

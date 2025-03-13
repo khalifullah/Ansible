@@ -1,0 +1,12 @@
+---
+- name: Create a new user
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create a new user  # Replace 'newuser' with the desired username
+      user:
+        name: newuser  # Replace 'newuser' with the actual username
+        state: present
+        groups: wheel  # Modify the group as needed
+        shell: /bin/bash  # Set the user's shell
+        password: "{{ 'password123' | password_hash('sha512') }}"  # Securely set user password

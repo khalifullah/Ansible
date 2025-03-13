@@ -1,0 +1,9 @@
+---
+- name: Delete a user
+  hosts: all
+  become: yes
+  tasks:
+    - name: Delete a user  # Replace 'olduser' with the username to remove
+      user:
+        name: olduser  # Replace 'olduser' with the actual username to delete
+        state: absent

@@ -1,0 +1,9 @@
+---
+- name: Create a filesystem on the new partition
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create a filesystem on the new partition
+      filesystem:
+        fstype: ext4
+        dev: /dev/sdb1

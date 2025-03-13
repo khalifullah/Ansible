@@ -1,0 +1,10 @@
+---
+- name: Upgrade all packages to the latest available version
+  hosts: all
+  become: yes
+  tasks:
+    - name: Upgrade all packages to the latest available version
+      yum:
+        name: '*'  # This upgrades all installed packages, similar to the previous task
+        state: latest
+        update_only: yes  # Ensures only packages that need upgrading are upgraded

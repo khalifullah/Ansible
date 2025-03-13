@@ -1,0 +1,9 @@
+---
+- name: Unlock a user account
+  hosts: all
+  become: yes
+  tasks:
+    - name: Unlock a user account  # Replace 'unlockeduser' with the username to unlock
+      user:
+        name: unlockeduser
+        password_lock: no  # Unlock the user account

@@ -1,0 +1,13 @@
+---
+- name: Check if a specific package is installed
+  hosts: all
+  become: yes
+  tasks:
+    - name: Check if httpd is installed
+      command: rpm -q httpd  # Replace with the actual package name
+      register: package_check
+      ignore_errors: true  # Ignore errors if the package is not installed
+
+    - name: Display package status
+      debug:
+        msg: "httpd Package Status: {{ 'Installed' if package_check.rc == 0 else 'Not installed' }}"

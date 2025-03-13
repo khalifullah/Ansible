@@ -1,0 +1,9 @@
+---
+- name: Update a specific package
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update a specific package
+      yum:
+        name: httpd  # Replace 'httpd' with the actual package name you want to update
+        state: latest

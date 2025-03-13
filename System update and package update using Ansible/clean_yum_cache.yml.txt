@@ -1,0 +1,7 @@
+---
+- name: Clean up YUM cache
+  hosts: all
+  become: yes
+  tasks:
+    - name: Clean up YUM cache
+      command: yum clean all  # Cleans up cached package data

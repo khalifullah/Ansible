@@ -1,0 +1,12 @@
+---
+- name: Ensure the mount point directory exists
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure the mount point directory exists
+      file:
+        path: /mnt/data
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'

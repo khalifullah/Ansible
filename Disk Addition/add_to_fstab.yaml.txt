@@ -1,0 +1,12 @@
+---
+- name: Add the new filesystem to /etc/fstab
+  hosts: all
+  become: yes
+  tasks:
+    - name: Add the new filesystem to /etc/fstab
+      mount:
+        path: /mnt/data
+        src: /dev/sdb1
+        fstype: ext4
+        opts: defaults
+        state: present

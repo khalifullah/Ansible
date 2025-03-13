@@ -1,0 +1,10 @@
+---
+- name: Remove the partition
+  hosts: all
+  become: yes
+  tasks:
+    - name: Remove the partition
+      parted:
+        device: /dev/sdb
+        number: 1
+        state: absent

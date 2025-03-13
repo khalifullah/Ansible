@@ -1,0 +1,12 @@
+---
+- name: Display disk information
+  hosts: all
+  become: yes
+  tasks:
+    - name: Display disk information
+      command: lsblk
+      register: disk_info
+
+    - name: Display disk information
+      debug:
+        var: disk_info.stdout

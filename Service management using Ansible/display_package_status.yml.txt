@@ -1,0 +1,8 @@
+---
+- name: Display package installation status
+  hosts: all
+  become: yes
+  tasks:
+    - name: Display package installation status
+      debug:
+        msg: "httpd Package Status: {{ 'Installed' if package_check.rc == 0 else 'Not installed' }}"

@@ -1,0 +1,9 @@
+---
+- name: Lock the user account
+  hosts: all
+  become: yes
+  tasks:
+    - name: Lock the user account
+      user:
+        name: k
+        password_lock: yes  # Lock the user account

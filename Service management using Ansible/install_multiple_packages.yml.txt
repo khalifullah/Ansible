@@ -1,0 +1,11 @@
+---
+- name: Install multiple packages
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install multiple packages
+      yum:
+        name: 
+          - vim
+          - git
+        state: present

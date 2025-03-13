@@ -1,0 +1,10 @@
+---
+- name: Enable firewall and allow SSH
+  hosts: all
+  become: yes
+  tasks:
+    - name: Enable firewall and allow SSH
+      firewalld:
+        service: ssh
+        permanent: yes
+        state: enabled

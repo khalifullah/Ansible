@@ -1,0 +1,9 @@
+---
+- name: Remove a package
+  hosts: all
+  become: yes
+  tasks:
+    - name: Remove a package  # Replace 'nano' with the package to remove
+      yum:
+        name: nano  # Package to be removed
+        state: absent  # Removes the package

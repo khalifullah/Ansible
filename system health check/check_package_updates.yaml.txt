@@ -1,0 +1,13 @@
+---
+- name: Check for available package updates
+  hosts: all
+  become: yes
+  tasks:
+    - name: Check for available package updates
+      command: yum check-update  # For Red Hat/CentOS systems
+      register: update_output
+      ignore_errors: true  # Ignore errors if no updates are available
+
+    - name: Display available updates
+      debug:
+        msg: "Available Updates: {{ update_output.stdout if update_output.rc == 0 else 'No updates available' }}"
