@@ -1,0 +1,66 @@
+---
+- name: Configure RHEL 8 Repository
+  hosts: all
+  become: yes
+  tasks:
+    - name: Mount /dev/sr0 to /mnt
+      ansible.builtin.mount:
+        path: /mnt
+        src: /dev/sr0
+        fstype: iso9660
+        state: mounted
+
+    - name: Change directory to /mnt
+      ansible.builtin.command: cd /mnt
+      changed_when: false
+
+    - name: List contents of /mnt
+      ansible.builtin.command: ls /mnt
+      register: mnt_contents
+      changed_when: false
+
+    - name: Display contents of /mnt
+      ansible.builtin.debug:
+        var: mnt_contents.stdout_lines
+
+    - name: Change directory to /etc/yum.repos.d
+      ansible.builtin.command: cd /etc/yum.repos.d
+      changed_when: false
+
+    - name: List contents of /etc/yum.repos.d
+      ansible.builtin.command: ls /etc/yum.repos.d
+      register: repo_contents
+      changed_when: false
+
+    - name: Display contents of /etc/yum.repos.d
+      ansible.builtin.debug:
+        var: repo_contents.stdout_lines
+
+    - name: Delete all files in /etc/yum.repos.d except rhel8.repo
+      ansible.builtin.file:
+        path: "/etc/yum.repos.d/{{ item }}"
+        state: absent
+      loop: "{{ repo_contents.stdout_lines }}"
+      when: item != "rhel8.repo"
+
+    - name: Create rhel8.repo file
+      ansible.builtin.file:
+        path: /etc/yum.repos.d/rhel8.repo
+        state: touch
+
+    - name: Configure rhel8.repo file
+      ansible.builtin.blockinfile:
+        path: /etc/yum.repos.d/rhel8.repo
+        block: |
+          [BaseOS]
+          name=BaseOS
+          baseurl=file:///mnt/BaseOS
+          gpgcheck=0
+          enabled=1
+
+          [AppStream]
+          name=AppStream
+          baseurl=file:///mnt/AppStream
+          gpgcheck=0
+          enabled=1
+        create: yes
